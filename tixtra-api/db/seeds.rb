@@ -5,16 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'rest-client'
-require 'json'
+User.destroy_all
+Venue.destroy_all
+Event.destroy_all
+Ticket.destroy_all
 
-10.times do
+
+20.times do
   User.create(
     username: Faker::Name.unique.name,
     location: "New York",
     age: rand(21...50),
-    gender: [male, female].sample,
-    interest: [romance, social, music, friends].sample,
+    gender: Faker::Gender.type,
+    interest: ["romance", "social", "music", "friends"].sample,
     avatar: UiFaces.face,
     bio: Faker::TvShows::VentureBros.quote,
     email: Faker::Internet.email,
@@ -22,10 +25,31 @@ require 'json'
   )
 end
 
-# url = "https://app.ticketmaster.com/discovery/v2/venues.json?classificationName=music&dmaId=345&apikey=U4exrI3LSXdAk4c4wYfmdix9kS7s8Pb9"
-# response = RestClient.get(url)
-# JSON.parse(response)
-#
-#   # Venue.create
-#   # Event.create
+url = "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=345&apikey=U4exrI3LSXdAk4c4wYfmdix9kS7s8Pb9"
+response = RestClient.get(url)
+data = JSON.parse(response)
+
+seed_events = data["_embedded"]["events"]
+
+seed_events.each do |event|
+  venue = Venue.find_or_create_by(
+    name: event["_embedded"]["venues"].first["name"],
+    address: event["_embedded"]["venues"].first["address"]["line1"],
+    city: event["_embedded"]["venues"].first["city"]["name"],
+    state: event["_embedded"]["venues"].first["state"]["name"])
+  Event.find_or_create_by(
+    venue_id: venue.id,
+    artist: event["name"],
+    date: event["dates"]["start"]["localDate"],
+    avatar: event["images"][0]["url"])
+end
+
+
 #   # Ticket.create
+15.times do
+  Ticket.create(
+    user_id: User.all.sample.id,
+    event_id: Event.all.sample.id,
+    available: [true, false].sample
+  )
+end

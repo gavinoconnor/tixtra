@@ -53,3 +53,5 @@ gem "faker", "~> 1.9"
 gem 'ticketmaster-sdk'
 
 gem 'ui_faces'
+
+gem 'rest-client'
