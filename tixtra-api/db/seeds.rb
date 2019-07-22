@@ -11,7 +11,7 @@ Event.destroy_all
 Ticket.destroy_all
 
 
-20.times do
+50.times do
   User.create(
     username: Faker::Name.unique.name,
     location: "New York",
@@ -36,7 +36,9 @@ seed_events.each do |event|
     name: event["_embedded"]["venues"].first["name"],
     address: event["_embedded"]["venues"].first["address"]["line1"],
     city: event["_embedded"]["venues"].first["city"]["name"],
-    state: event["_embedded"]["venues"].first["state"]["name"])
+    state: event["_embedded"]["venues"].first["state"]["name"],
+    avatar: event["_embedded"]["venues"].first["images"][0]["url"],
+    url: event["_embedded"]["venues"].first["url"])
   Event.find_or_create_by(
     venue_id: venue.id,
     artist: event["name"],
@@ -46,7 +48,7 @@ end
 
 
 #   # Ticket.create
-15.times do
+50.times do
   Ticket.create(
     user_id: User.all.sample.id,
     event_id: Event.all.sample.id,
