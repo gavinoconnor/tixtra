@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from "../actions"
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +15,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -39,8 +41,41 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+const LogInForm = (props) => {
   const classes = useStyles();
+  const [values, setValues] = React.useState({
+    username: "",
+    password: ""
+  })
+
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value})
+    console.log(values)
+  };
+
+  const handleSubmit = (event, values) => {
+    event.preventDefault()
+    console.log("SUBMIT", values)
+    fetch("http://localhost:3000/api/v1/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Accepts": "application/json",
+			},
+			body: JSON.stringify(values)
+		})
+		.then(res => res.json())
+		.then(response => {
+			if (response.errors) {
+				alert(response.errors)
+			} else {
+				console.log("fetch", response)
+				localStorage.setItem("token", response.token)
+				props.login(response.user)
+				props.history.push(`/users/${response.user.id}`)
+			}
+		})
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,17 +87,19 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={(event) => handleSubmit(event, values)}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="username"
+            label="Username"
+            name="username"
+            value={values.username}
+            autoComplete="username"
             autoFocus
+            onChange={handleChange('username')}
           />
           <TextField
             variant="outlined"
@@ -70,10 +107,12 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
+            value={values.password}
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleChange('password')}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -107,3 +146,11 @@ export default function SignIn() {
     </Container>
   );
 }
+
+const mapStateToProps = state => ({
+  username: state.username,
+  password: state.password,
+  currentUser: state.currentUser
+})
+
+export default connect(mapStateToProps, { login })(LogInForm);
