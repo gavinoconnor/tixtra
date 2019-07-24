@@ -11,7 +11,6 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 class EventsContainer extends React.Component {
 
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchEvents();
    }
 

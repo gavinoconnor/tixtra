@@ -1,20 +1,27 @@
 class Api::V1::AuthController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  # skip_before_action :authorized, only: [:create]
 
-  def create
-    @user = User.find_by(username: user_login_params[:username])
+  def login
+    # check if my params contain the entered username and password
+    user = User.find_by(username: params["username"])
 
-    if @user && @user.authenticate(user_login_params[:password])
-      token = encode_token({ user_id: @user.id })
-      render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
+    if user && user.authenticate(params["password"])
+
+      token = JWT.encode({user_id: user.id}, 'winteriscoming')
+
+      render json: {user: UserSerializer.new(user), token: token}
+
+      # render json: user
     else
-      render json: { message: 'Invalid username or password' }, status: :unauthorized
+      render json: {errors: "Ah ah ah...you didn't say the magic word!"}
     end
   end
 
-  private
-
-  def user_login_params
-    params.require(:user).permit(:username, :password)
+  def auto_login
+    if session_user
+      render json: session_user
+    else
+      render json: {errors: "Don't touch my cookies!"}
+    end
   end
 end
