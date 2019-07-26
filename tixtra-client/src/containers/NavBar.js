@@ -127,7 +127,9 @@ function ButtonAppBar() {
                 >
                   <MenuItem
                     onClick={handleClose}>
-                    Profile
+                    <Link to="/users/:id">
+                      Profile
+                    </Link>
                   </MenuItem>
                   <MenuItem
                     onClick={handleClose}>

@@ -4,7 +4,8 @@ import {
   FETCH_ALL_VENUES,
   FETCH_ALL_EVENTS,
   LOG_IN,
-  CREATE_USER
+  CREATE_USER,
+  UPDATE_USER
   } from './types'
 
 const defaultState = {
@@ -12,7 +13,8 @@ const defaultState = {
   users: [],
   venues: [],
   events: [],
-  isLoggedin: false
+  isLoggedin: false,
+  viewedUser: null
 }
 
 
@@ -26,11 +28,14 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, events: action.payload}
     case FETCH_USER:
       console.log(action.payload)
-      return {...prevState, currentUser: action.payload}
+      return {...prevState, viewedUser: action.payload}
     case LOG_IN:
-    console.log('log in:', action.payload)
       return {...prevState, currentUser: action.payload }
     case CREATE_USER:
+    console.log("create user:", action.payload)
+      return {...prevState, currentUser: action.payload }
+    case UPDATE_USER:
+    console.log("update user:", action.payload)
       return {...prevState, currentUser: action.payload }
     default:
       return prevState
