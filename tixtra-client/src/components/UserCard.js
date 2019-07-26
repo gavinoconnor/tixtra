@@ -1,4 +1,7 @@
 import React from 'react';
+import UserProfile from './UserProfile';
+import { Link } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 // import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -24,8 +27,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// const userVariable =
+
+const handleClick = () => {
+  console.log("click")
+  // if (props.userVariable)
+  // userVariable = <UserProfile />
+};
+
 const UserCard = (props) => {
-  console.log(props)
+  console.log("usercard", props)
   const classes = useStyles();
     return (
       <div>
@@ -35,9 +46,11 @@ const UserCard = (props) => {
           title={props.username}
           subtitle={<span>"{props.bio}"</span>}
           actionIcon={
-            <IconButton aria-label={`info about ${props.username}`} className={classes.icon}>
-              <InfoIcon />
-            </IconButton>
+            <Link to={`/users/${props.id}`}>
+              <IconButton aria-label={`info about ${props.username}`} className={classes.icon}>
+                <InfoIcon />
+              </IconButton>
+            </Link>
           }
         />
       </GridListTile>

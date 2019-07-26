@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createUser } from '../actions';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -54,6 +57,29 @@ const SignupForm = (props) => {
     console.log(values)
   };
 
+  const handleSubmit = (event, values) => {
+    event.preventDefault();
+      fetch("http://localhost:3000/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepts": "application/json"
+        },
+        body: JSON.stringify(values)
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.errors) {
+  				alert(response.errors)
+  			} else {
+    				console.log("sign up", response)
+    				localStorage.setItem("token", response.token)
+    				props.createUser(response.user)
+    				props.history.push(`/users/${response.user.id}`)
+          }
+      })
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -64,7 +90,7 @@ const SignupForm = (props) => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={(event) => handleSubmit(event, values)}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <TextField
@@ -139,4 +165,10 @@ const SignupForm = (props) => {
   );
 }
 
-export default SignupForm;
+const mapStateToProps = state => ({
+  username: state.username,
+  password: state.password,
+  currentUser: state.currentUser
+})
+
+export default connect(mapStateToProps, { createUser })(SignupForm);

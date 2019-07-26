@@ -12,35 +12,37 @@ import { login } from './actions';
 
 // import './App.css';
 
-const componentDidMount = () => {
-		const token = localStorage.getItem("token")
-		if(token){
-			fetch("http://localhost:3000/api/v1/session_user", {
-				headers: {
-					"Authorization": token
-				}
-			})
-			.then(res => res.json())
-			.then(response => {
-				if (response.errors){
-					localStorage.removeItem("user_id")
-					alert(response.errors)
-				} else {
-					this.props.login(response)
-				}
-			})
-		}
-	}
 
+class App extends React.Component {
+  componentDidMount = () => {
+  		const token = localStorage.getItem("token")
+  		if(!!token){
+  			fetch("http://localhost:3000/api/v1/auto_login", {
+  				headers: {
+  					"Authorization": token
+  				}
+  			})
+  			.then(res => res.json())
+  			.then(response => {
+  				if (response.errors){
+  					localStorage.removeItem("user_id")
+  					alert(response.errors)
+  				} else {
+            console.log("app", response)
+  					this.props.login(response)
+  				}
+  			})
+  		}
+  	}
 
-function App() {
+  render() {
   return (
     <div className="App">
       <NavBar />
         <Switch>
+          <Route path="/users/:id" component={UserProfile}/>
           <Route path="/login" component={LoginForm}/>
           <Route path="/signup" component={SignupForm}/>
-          <Route path="/users/:id" component={UserProfile}/>
           <Route path="/users" component={UsersContainer}/>
           <Route path="/venues" component={VenuesContainer}/>
           <Route path="/events" component={EventsContainer}/>
@@ -48,6 +50,7 @@ function App() {
         </Switch>
     </div>
   );
+  }
 }
 
 const mapStateToProps = state => {

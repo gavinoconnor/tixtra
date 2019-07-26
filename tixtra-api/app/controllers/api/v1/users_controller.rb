@@ -12,18 +12,17 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.new(
-    username: params["username"],
-    email: params["email"],
-    password: params["password"]
-    )
-    if @user.valid?
-      @user.save
-      @token = encode_token({ user_id: @user.id })
-      render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
-    else
-     render json: { error: 'failed to create user' }, status: :not_acceptable
-    end
- end
+      username: params["username"],
+      email: params["email"],
+      password: params["password"]
+      )
+    if @user.save
+        @token = encode_token({ user_id: @user.id })
+        render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+      else
+       render json: { error: 'failed to create user' }, status: :not_acceptable
+      end
+  end
 
   def show
    @user = User.find_by(id: params[:id])
@@ -37,9 +36,12 @@ class Api::V1::UsersController < ApplicationController
   def update
     @user = User.find(params["id"])
     if @user.update(
-      username: params["username"],
-      email: params["email"],
-      password: params["password"]
+      age: params["age"],
+      location: params["location"],
+      gender: params["gender"],
+      interest: params["interest"],
+      avatar: params["avatar"],
+      bio: params["bio"]
     )
       render json: @user
     else

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from "../actions"
+import { login } from '../actions';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -50,7 +50,6 @@ const LogInForm = (props) => {
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value})
-    console.log(values)
   };
 
   const handleSubmit = (event, values) => {
@@ -69,7 +68,7 @@ const LogInForm = (props) => {
 			if (response.errors) {
 				alert(response.errors)
 			} else {
-				console.log("fetch", response)
+				// console.log("fetch", response)
 				localStorage.setItem("token", response.token)
 				props.login(response.user)
 				props.history.push(`/users/${response.user.id}`)

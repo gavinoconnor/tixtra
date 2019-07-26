@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_ALL_EVENTS, LOG_IN, CREATE_USER } from './types';
+import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_ALL_EVENTS, LOG_IN, CREATE_USER, UPDATE_USER, TOGGLE_EDIT } from './types';
 
 function fetchUsers(){
   return function(dispatch){
@@ -15,8 +15,7 @@ function fetchUser(id){
     fetch(`http://localhost:3000/api/v1/users/${id}`)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-        dispatch({type: FETCH_USER, payload: data})
+      dispatch({type: FETCH_USER, payload: data})
     })
   }
 }
@@ -32,7 +31,7 @@ function fetchVenues(){
 }
 
 function fetchEvents(){
-  return function(dispatch){
+  return function(dispatch) {
     fetch("http://localhost:3000/api/v1/events")
     .then(res => res.json())
     .then(data => {
@@ -42,22 +41,23 @@ function fetchEvents(){
 }
 
 function login(response) {
+  console.log("action", response)
   return function(dispatch){
     dispatch({type: LOG_IN, payload: response})
   }
 }
 
-function createUser(){
+function createUser(response) {
   return function(dispatch){
-    fetch("http://localhost:3000/api/v1/users")
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-        dispatch({type: CREATE_USER, payload: data})
-    })
+    dispatch({type: CREATE_USER, payload: response})
   }
 }
 
+function updateUser(id, response) {
+  return function(dispatch) {
+    dispatch({type: UPDATE_USER, payload: response})
+  }
+}
 
 
 export {
@@ -66,5 +66,6 @@ export {
   fetchVenues,
   fetchEvents,
   login,
-  createUser
+  createUser,
+  updateUser
 }

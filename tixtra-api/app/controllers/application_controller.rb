@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::API
   # before_action :authorized
 
-  # def encode_token(payload)
-  #   # pass user_id
-  #   JWT.encode({user_id: payload}, 'winteriscoming')
-  # end
+  def encode_token(user_id)
+    # pass user_id
+    JWT.encode({user_id: user_id}, 'winteriscoming')
+  end
 
   def auth_header
     request.headers['Authorization']
@@ -22,8 +22,8 @@ class ApplicationController < ActionController::API
   end
 
   def session_user
-    if decoded_token
-      user_id = decoded_token[0]['user_id']
+    if decode_token
+      user_id = decode_token[0]['user_id']
       @user = User.find_by(id: user_id)
     end
   end

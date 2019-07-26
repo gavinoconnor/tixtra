@@ -21,7 +21,7 @@ class Api::V1::AuthController < ApplicationController
     if session_user
       render json: session_user
     else
-      render json: {errors: "Don't touch my cookies!"}
+      render json: {errors: "Scram!"}
     end
   end
 end
