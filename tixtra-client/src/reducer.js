@@ -1,20 +1,26 @@
 import {
-  FETCH_USER,
   FETCH_ALL_USERS,
   FETCH_ALL_VENUES,
   FETCH_ALL_EVENTS,
+  FETCH_USER,
+  FETCH_VENUE,
+  FETCH_EVENT,
   LOG_IN,
+  LOG_OUT,
   CREATE_USER,
   UPDATE_USER
   } from './types'
 
 const defaultState = {
   currentUser: null,
+  isLoggedin: false,
+  viewedUser: null,
+  selectedVenue: null,
+  selectedEvent: null,
   users: [],
   venues: [],
   events: [],
-  isLoggedin: false,
-  viewedUser: null
+  tickets: [],
 }
 
 
@@ -27,16 +33,22 @@ function reducer(prevState = defaultState, action) {
     case FETCH_ALL_EVENTS:
       return {...prevState, events: action.payload}
     case FETCH_USER:
-      console.log(action.payload)
+      console.log("USER:", action.payload)
       return {...prevState, viewedUser: action.payload}
+    case FETCH_VENUE:
+      console.log("VENUE:", action.payload)
+      return {...prevState, selectedVenue: action.payload}
+    case FETCH_EVENT:
+      console.log("EVENT:", action.payload)
+      return {...prevState, selectedEvent: action.payload}
     case LOG_IN:
-      return {...prevState, currentUser: action.payload }
+      return {...prevState, currentUser: action.payload}
+    case LOG_OUT:
+      return {...prevState, currentUser: null}
     case CREATE_USER:
-    console.log("create user:", action.payload)
-      return {...prevState, currentUser: action.payload }
+      return {...prevState, currentUser: action.payload}
     case UPDATE_USER:
-    console.log("update user:", action.payload)
-      return {...prevState, currentUser: action.payload }
+      return {...prevState, currentUser: action.payload}
     default:
       return prevState
   }

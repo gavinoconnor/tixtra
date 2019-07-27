@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -17,9 +19,11 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 const TicketCard = (props) => {
   const classes = useStyles();
-  console.log(props)
+  // console.log("ticket card:", props.currentUser.tickets)
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -38,8 +42,13 @@ const TicketCard = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
+
         <Button size="small" color="primary">
-          Ticket Status
+          Ticket Available
+        </Button>
+
+        <Button size="small" color="primary">
+          Ticket Unavailable
         </Button>
         <Button size="small" color="primary">
           Request Ticket
@@ -49,4 +58,10 @@ const TicketCard = (props) => {
   );
 }
 
-export default TicketCard;
+const mapStateToProps = state => ({
+  currentUser: state.currentUser,
+  viewedUser: state.viewedUser,
+  tickets: state.tickets
+})
+
+export default connect(mapStateToProps)(TicketCard);

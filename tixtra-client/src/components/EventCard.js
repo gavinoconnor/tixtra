@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -39,9 +41,11 @@ const EventCard = (props) => {
           title={props.name}
           subtitle={<span>{props.artist}</span>}
           actionIcon={
+            <Link to={`/events/${props.id}`}>
             <IconButton aria-label={`info about ${props.artist}`} className={classes.icon}>
               <InfoIcon />
             </IconButton>
+            </Link>
           }
         />
       </GridListTile>

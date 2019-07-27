@@ -2,10 +2,13 @@ import React from 'react';
 import LoginForm from './containers/LoginForm';
 import SignupForm from './containers/SignupForm';
 import NavBar from './containers/NavBar';
-import UsersContainer from './containers/UsersContainer'
-import UserProfile from './components/UserProfile'
-import VenuesContainer from './containers/VenuesContainer'
-import EventsContainer from './containers/EventsContainer'
+import UsersContainer from './containers/UsersContainer';
+import UserProfile from './components/UserProfile';
+import VenuesContainer from './containers/VenuesContainer';
+import VenueProfile from './components/VenueProfile';
+import EventsContainer from './containers/EventsContainer';
+import EventProfile from './components/EventProfile';
+
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from './actions';
@@ -41,6 +44,8 @@ class App extends React.Component {
       <NavBar />
         <Switch>
           <Route path="/users/:id" component={UserProfile}/>
+          <Route path="/venues/:id" component={VenueProfile}/>
+          <Route path="/events/:id" component={EventProfile}/>
           <Route path="/login" component={LoginForm}/>
           <Route path="/signup" component={SignupForm}/>
           <Route path="/users" component={UsersContainer}/>
@@ -53,11 +58,5 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log("App", state)
-  return {
-
-  }
-}
 
 export default connect(null, { login })(App);
