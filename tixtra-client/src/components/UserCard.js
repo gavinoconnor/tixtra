@@ -1,5 +1,5 @@
 import React from 'react';
-import UserProfile from './UserProfile';
+// import UserProfile from './UserProfile';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,7 +36,6 @@ const handleClick = () => {
 };
 
 const UserCard = (props) => {
-  console.log("usercard", props)
   const classes = useStyles();
     return (
       <div>

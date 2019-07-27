@@ -6,7 +6,7 @@ import ProfileForm from './ProfileForm';
 
 import Typography from '@material-ui/core/Typography';
 // import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 // import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
@@ -24,19 +24,17 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchUser(this.props.match.params.id);
    }
 
   toggleEdit = () => {
-    console.log("toggle", this.state)
     this.setState({
       isEditing: !this.state.isEditing
     })
   }
 
   render() {
-    console.log(this.props)
+    console.log("user profile:", this.props)
     if (!this.props.viewedUser || !this.props.currentUser) {
       return <h1>loading</h1>
     }

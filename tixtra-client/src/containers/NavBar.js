@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-// import { Router } from 'react-router';
+import { connect } from 'react-redux';
+import { logout } from '../actions';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar'
@@ -13,7 +14,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import SearchIcon from '@material-ui/icons/Search';
-// import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -68,10 +68,11 @@ const handleClick = () => {
   console.log('click')
 }
 
-function ButtonAppBar() {
+const NavBar = (props) => {
+  console.log("logout", props.currentUser)
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-   const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl);
 
    // function handleChange(event) {
    //   setAuth(event.target.checked);
@@ -90,10 +91,11 @@ function ButtonAppBar() {
         <AppBar position="static">
             <Toolbar>
               <LocalActivityOutlinedIcon/>
-                <Typography variant="h5" color="textPrimary">&nbsp;&nbsp;
-                  <Link to="/events"> Tixtra </Link>
-                </Typography>&nbsp;&nbsp;
+
+                  <Link to="/"> Tixtra </Link>
+
                 <LocalActivityOutlinedIcon/>
+
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
@@ -107,9 +109,21 @@ function ButtonAppBar() {
                     inputProps={{ 'aria-label': 'Search' }}
                   />
                 </div>
+
+                <Typography variant="h5" color="textPrimary">&nbsp;&nbsp;
+                  <Link to="/users"> Users </Link>
+                </Typography>&nbsp;&nbsp;
+                <Typography variant="h5" color="textPrimary">&nbsp;&nbsp;
+                  <Link to="/events"> Events </Link>
+                </Typography>&nbsp;&nbsp;
+                <Typography variant="h5" color="textPrimary">&nbsp;&nbsp;
+                  <Link to="/venues"> Venues </Link>
+                </Typography>&nbsp;&nbsp;
+
                 <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="Menu" aria-haspopup="true" onClick={handleMenu}>
                   <MenuIcon/>
                 </IconButton>
+
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -127,12 +141,12 @@ function ButtonAppBar() {
                 >
                   <MenuItem
                     onClick={handleClose}>
-                    <Link to="/users/:id">
+                    <Link to={`/users/${props.id}`}>
                       Profile
                     </Link>
                   </MenuItem>
                   <MenuItem
-                    onClick={handleClose}>
+                    onClick={props.logout}>
                     <Link to="/">
                       Log Out
                     </Link>
@@ -143,4 +157,9 @@ function ButtonAppBar() {
         </div>
     )
 }
-export default ButtonAppBar;
+
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+})
+
+export default connect(mapStateToProps, { logout })(NavBar);

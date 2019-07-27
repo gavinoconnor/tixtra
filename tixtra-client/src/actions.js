@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_ALL_EVENTS, LOG_IN, CREATE_USER, UPDATE_USER, TOGGLE_EDIT } from './types';
+import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER } from './types';
 
 function fetchUsers(){
   return function(dispatch){
@@ -30,6 +30,16 @@ function fetchVenues(){
   }
 }
 
+function fetchVenue(id){
+  return function(dispatch){
+    fetch(`http://localhost:3000/api/v1/venues/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      dispatch({type: FETCH_VENUE, payload: data})
+    })
+  }
+}
+
 function fetchEvents(){
   return function(dispatch) {
     fetch("http://localhost:3000/api/v1/events")
@@ -40,10 +50,26 @@ function fetchEvents(){
   }
 }
 
+function fetchEvent(id){
+  return function(dispatch){
+    fetch(`http://localhost:3000/api/v1/events/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      dispatch({type: FETCH_EVENT, payload: data})
+    })
+  }
+}
+
 function login(response) {
   console.log("action", response)
   return function(dispatch){
     dispatch({type: LOG_IN, payload: response})
+  }
+}
+
+function logout() {
+  return function(dispatch){
+    dispatch({type: LOG_OUT})
   }
 }
 
@@ -64,8 +90,11 @@ export {
   fetchUsers,
   fetchUser,
   fetchVenues,
+  fetchVenue,
   fetchEvents,
+  fetchEvent,
   login,
+  logout,
   createUser,
   updateUser
 }
