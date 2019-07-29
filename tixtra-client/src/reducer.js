@@ -8,7 +8,8 @@ import {
   LOG_IN,
   LOG_OUT,
   CREATE_USER,
-  UPDATE_USER
+  UPDATE_USER,
+  SEARCH
   } from './types'
 
 const defaultState = {
@@ -21,6 +22,9 @@ const defaultState = {
   venues: [],
   events: [],
   tickets: [],
+  viewingUsers: false,
+  viewingVenues: false,
+  viweingEvents: false
 }
 
 
@@ -49,9 +53,15 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, currentUser: action.payload}
     case UPDATE_USER:
       return {...prevState, currentUser: action.payload}
+    case SEARCH:
+      console.log("SEARCH:")
+      return {...prevState, searchTerm: action.payload }
     default:
       return prevState
   }
 }
+// const users = prevState.users.filter(user => {
+  //   return user.username.toLowerCase().includes(prevState.searchTerm.toLowerCase())
+  // })
 
 export default reducer

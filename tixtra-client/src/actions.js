@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER } from './types';
+import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER, SEARCH } from './types';
 
 function fetchUsers(){
   return function(dispatch){
@@ -85,6 +85,13 @@ function updateUser(id, response) {
   }
 }
 
+function search(searchTerm) {
+  console.log("search", searchTerm)
+  return function(dispatch) {
+    dispatch({type: SEARCH, payload: searchTerm})
+  }
+}
+
 
 export {
   fetchUsers,
@@ -96,5 +103,6 @@ export {
   login,
   logout,
   createUser,
-  updateUser
+  updateUser,
+  search
 }
