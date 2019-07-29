@@ -50,6 +50,7 @@ const TicketCard = (props) => {
         <Button size="small" color="primary">
           Ticket Unavailable
         </Button>
+
         <Button size="small" color="primary">
           Request Ticket
         </Button>
