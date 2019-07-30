@@ -88,12 +88,12 @@ const NavBar = (props) => {
                 >
                   <MenuItem
                     onClick={handleClose}>
-                    {props.user
-                    ? <Link to={`/users/${props.id}`}>
-                        Log In
-                      </Link>
-                    : <Link to={`/users/${props.id}`}>
+                    {props.currentUser
+                    ? <Link to={`/users/${props.currentUser.id}`}>
                         Profile
+                      </Link>
+                    : <Link to="/">
+                        Log In
                       </Link>}
                   </MenuItem>
                   <MenuItem

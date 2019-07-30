@@ -8,8 +8,7 @@ import {
   LOG_IN,
   LOG_OUT,
   CREATE_USER,
-  UPDATE_USER,
-  SEARCH
+  UPDATE_USER
   } from './types'
 
 const defaultState = {
@@ -53,9 +52,6 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, currentUser: action.payload}
     case UPDATE_USER:
       return {...prevState, currentUser: action.payload}
-    case SEARCH:
-      console.log("SEARCH:")
-      return {...prevState, searchTerm: action.payload }
     default:
       return prevState
   }
