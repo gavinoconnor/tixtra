@@ -4,16 +4,15 @@ import { fetchUser } from '../actions';
 import TicketCard from './TicketCard';
 import ProfileForm from './ProfileForm';
 
+import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-// import Paper from '@material-ui/core/Paper';
-// import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-// import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import Container from '@material-ui/core/Container';
+// import Card from '@material-ui/core/Card';
+// import CardActionArea from '@material-ui/core/CardActionArea';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 
 
@@ -39,91 +38,55 @@ class UserProfile extends React.Component {
       return <h1>loading</h1>
     }
     return (
-      <div style={{padding: 3}}>
-        <Grid container
-          item md={2}
-          spacing={2}
-          direction="row"
-          alignItems="center"
-          justify="space-around"
-          >
-          <Grid item >
-            <Card style={{
-              maxWidth: 345
-            }}>
-              <CardActionArea>
-                <CardMedia
-                  style={{
-                    height: 240
-                  }}
-                  image={this.props.viewedUser.avatar} alt={this.props.viewedUser.username}
-                  title="user-avatar"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2" color="textSecondary">
-                    {this.props.viewedUser.username}
-                  </Typography>
-                  <Typography variant="body2" color="textPrimary" component="p">
-                    "{this.props.viewedUser.bio}"
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary">
-                  Favorite
-                </Button>
-                <Button size="small" color="primary">
-                  Message
-                </Button>
-              </CardActions>
-            </Card>
+      <div className="user-profile-page">
+        <div>
+          <Grid container style={{display:"grid", direction:"row", backgroundColor: "#80CBC4", paddingTop: "2%", paddingBottom: "2%", justifyContent: "space-evenly", width: "100%"}}>
+
+            <Grid item style={{display:"flex", direction:"row", justify: "space-between", alignItems:"center"}}>
+             <Avatar alt={this.props.viewedUser.username} src={this.props.viewedUser.avatar} style={{margin: "10px", width: "100px", height: "100px"}}/>
+             <Typography >
+               Name: {this.props.viewedUser.username} <br />
+               Location: {this.props.viewedUser.location} <br />
+               Age: {this.props.viewedUser.age} <br />
+               Here for: {this.props.viewedUser.interest}
+             </Typography>
+
+             </Grid>
+               <Grid item style={{justifyContent: "center"}}>
+               {this.props.viewedUser.id === this.props.currentUser.id
+                 ? <Button size="small" onClick={this.toggleEdit}>Edit Profile</Button>
+                 : null }
+               {this.state.isEditing
+                ? <Container item>
+                    <ProfileForm />
+                  </Container>
+                : null}
+               </Grid>
           </Grid>
+        </div>
 
-          { (this.state.isEditing && this.props.viewedUser.id === this.props.currentUser.id)
-            ? <ProfileForm />
-            : <Grid item>
-                <Card className='user-bio'
-                  style={{height: 375, width: 345}}>
-                  <CardContent>
-                    <br />
-                    <Typography color="textSecondary" variant="h5" justify="center">
-                      Age: <strong>{this.props.viewedUser.age}</strong>
-                    </Typography>
-                    <br />
-                    <Typography color="textSecondary" variant="h5" component="h2">
-                      Location: <strong>{this.props.viewedUser.location}</strong>
-                    </Typography>
-                    <br />
-                    <Typography color="textSecondary" variant="h5" component="h2">
-                      Gender: <strong>{this.props.viewedUser.gender}</strong>
-                    </Typography>
-                    <br />
-                    <Typography color="textSecondary" variant="h5" component="h2">
-                      Interest: <strong>{this.props.viewedUser.interest}</strong>
-                    </Typography>
-                  </CardContent>
-                    <CardActions>
-                      <Button size="medium" onClick={this.toggleEdit}>Edit Profile</Button>
-                    </CardActions>
-                </Card>
-              </Grid>}
-
-      <Grid container
-        spacing={2}
-        direction="row"
-        display="flex"
-        justify="flex-start"
-        alignItems="flex-start">
-        {this.props.viewedUser.events.length > 0
-          ?
-        <Grid item md={3}  >
-        {this.props.viewedUser.events.map(event => {
-          return <TicketCard key={event.id} {...event}/>
-        })}
+        <Grid container style={{display: "grid", gridTemplateColumns: "2fr 2fr", justifyContent:"flex-start"}}>
+          {this.props.viewedUser.events.length > 0
+            ?
+          <Grid item>
+            <Typography>
+              Tickets
+            </Typography>
+          {this.props.viewedUser.events.map(event => {
+            console.log(event)
+            return <TicketCard key={event.id} {...event}/>
+          })}
+          </Grid>
+          : <Typography>No current tickets</Typography>}
+          <Grid item style={{justifyContent: "center"}}>
+            <Typography>
+              Friends
+            </Typography>
+            {/* {this.props.viewedUser.friends.map(friend => {
+              return <FriendCard key={friend.id {...friend}}/>
+            })} */}
+          </Grid>
         </Grid>
-        : <h1>No tickets</h1>}
-      </Grid>
-    </Grid>
     </div>
     );
   }

@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :events, through: :tickets
 
   # requests made by this user
-  # has_many :requests
-  # has_many :requested_tickets, through: :requests, class_name: "Ticket", foreign_key: "ticket_id"
+  has_many :requests
+  has_many :requested_tickets, through: :requests, class_name: "Ticket", foreign_key: "ticket_id"
 
   has_many :friendships
   has_many :friends, through: :friendships

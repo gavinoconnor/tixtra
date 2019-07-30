@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :venues
       resources :events
       resources :tickets
+      resources :requests
       get '/auto_login', to: 'auth#auto_login'
 
       resources :conversations do

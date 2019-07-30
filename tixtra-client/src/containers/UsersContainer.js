@@ -28,7 +28,6 @@ class UsersContainer extends React.Component {
   }
 
   handleChange = (event) => {
-    console.log(event.target.value)
     this.setState({
       searchTerm: event.target.value
     }, () => this.applyFilter())

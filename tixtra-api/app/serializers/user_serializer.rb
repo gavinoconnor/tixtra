@@ -5,4 +5,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :events
   has_many :friendships
   has_many :conversations
+  has_many :requests
 end

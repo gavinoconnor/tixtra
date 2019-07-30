@@ -37,7 +37,7 @@ seed_events.each do |event|
     address: event["_embedded"]["venues"].first["address"]["line1"],
     city: event["_embedded"]["venues"].first["city"]["name"],
     state: event["_embedded"]["venues"].first["state"]["name"],
-    avatar: event["_embedded"]["venues"].first["images"][0]["url"],
+    avatar: event["_embedded"]["venues"].first["images"] ? event["_embedded"]["venues"].first["images"][0]["url"] : "https://tinyurl.com/y3qfoxky",
     url: event["_embedded"]["venues"].first["url"])
   Event.find_or_create_by(
     venue_id: venue.id,
@@ -45,7 +45,6 @@ seed_events.each do |event|
     date: event["dates"]["start"]["localDate"],
     avatar: event["images"][0]["url"])
 end
-
 
 #   # Ticket.create
 50.times do
