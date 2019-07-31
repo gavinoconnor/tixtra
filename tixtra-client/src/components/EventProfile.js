@@ -32,6 +32,7 @@ class EventProfile extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  users: state.users,
   events: state.events,
   selectedEvent: state.selectedEvent
 })

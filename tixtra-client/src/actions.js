@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER } from './types';
+import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER, MAKE_REQUEST } from './types';
 
 function fetchUsers(){
   return function(dispatch){
@@ -61,7 +61,6 @@ function fetchEvent(id){
 }
 
 function login(response) {
-  console.log("action", response)
   return function(dispatch){
     dispatch({type: LOG_IN, payload: response})
   }
@@ -85,7 +84,12 @@ function updateUser(id, response) {
   }
 }
 
-
+function makeRequest(response) {
+  console.log("Request:", response)
+  return function(dispatch){
+    dispatch({type: MAKE_REQUEST, payload: response})
+  }
+}
 
 
 
@@ -99,7 +103,8 @@ export {
   login,
   logout,
   createUser,
-  updateUser
+  updateUser,
+  makeRequest
 }
 
 // function search(searchTerm) {

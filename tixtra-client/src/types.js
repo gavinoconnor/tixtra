@@ -8,6 +8,7 @@ const LOG_IN = "LOG_IN"
 const LOG_OUT = "LOG_OUT"
 const CREATE_USER = "CREATE_USER"
 const UPDATE_USER = "UPDATE_USER"
+const MAKE_REQUEST = "MAKE_REQUEST"
 
 
 
@@ -21,5 +22,6 @@ export {
   LOG_IN,
   LOG_OUT,
   CREATE_USER,
-  UPDATE_USER
+  UPDATE_USER,
+  MAKE_REQUEST
 }
