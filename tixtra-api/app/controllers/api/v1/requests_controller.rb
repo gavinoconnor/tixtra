@@ -10,10 +10,10 @@ class Api::V1::RequestsController < ApplicationController
  end
 
   def create
-    @request = Request.new(params[:id])
-    if @request.save
-      redirect_to users_path
-    end
+    @request = Request.create!(user_id: params[:user_id], ticket_id: params[:ticket_id], requester: params[:requester])
+
+    render json: @request
+
   end
 
 end

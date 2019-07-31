@@ -31,7 +31,6 @@ class App extends React.Component {
   					localStorage.removeItem("user_id")
   					alert(response.errors)
   				} else {
-            console.log("app", response)
   					this.props.login(response)
   				}
   			})

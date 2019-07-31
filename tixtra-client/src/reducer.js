@@ -8,7 +8,8 @@ import {
   LOG_IN,
   LOG_OUT,
   CREATE_USER,
-  UPDATE_USER
+  UPDATE_USER,
+  MAKE_REQUEST
   } from './types'
 
 const defaultState = {
@@ -21,6 +22,7 @@ const defaultState = {
   venues: [],
   events: [],
   tickets: [],
+  requests: [],
   viewingUsers: false,
   viewingVenues: false,
   viweingEvents: false
@@ -52,6 +54,8 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, currentUser: action.payload}
     case UPDATE_USER:
       return {...prevState, currentUser: action.payload}
+    case MAKE_REQUEST:
+      return {...prevState, requests: action.payload}
     default:
       return prevState
   }

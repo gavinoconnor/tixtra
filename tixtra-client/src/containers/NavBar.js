@@ -26,14 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 const NavBar = (props) => {
-  console.log("navbar", props)
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
 
    // function handleChange(event) {
    //   setAuth(event.target.checked);
@@ -53,7 +50,7 @@ const NavBar = (props) => {
             <Toolbar>
               <LocalActivityOutlinedIcon/>
               <Typography variant="h5" color="textPrimary">
-                  <Link to="/"> Tixtra </Link>
+                  <Link to="/"> <Button size="medium"> Tixtra </Button> </Link>
               </Typography>
                 <LocalActivityOutlinedIcon/>&nbsp;&nbsp;
                 <div className="nav-options" style={{display: 'flex', flexDirection: 'row', justify: 'center'}}>
