@@ -5,6 +5,11 @@ class Api::V1::TicketsController < ApplicationController
     render json: @tickets
   end
 
+  def create
+    @ticket = Ticket.create!(ticket_params)
+      render json: @ticket
+  end
+
   def show
    @ticket = Ticket.find_by(id: params[:id])
    render json: @ticket
@@ -18,5 +23,11 @@ class Api::V1::TicketsController < ApplicationController
       render json: { error: "Bad." }, status: :not_accepted
     end
   end
+
+  private
+   def ticket_params
+
+    params.require(:ticket).permit(:event_id, :user_id)
+   end
 
 end

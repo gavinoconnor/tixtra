@@ -11,13 +11,13 @@ Event.destroy_all
 Ticket.destroy_all
 
 
-50.times do
+100.times do
   User.create(
     username: Faker::Name.unique.name,
     location: "New York",
     age: rand(21...50),
     gender: Faker::Gender.type,
-    interest: ["romance", "social", "music", "friends"].sample,
+    interest: ["Romance", "Social", "Music", "Friends"].sample,
     avatar: UiFaces.face,
     bio: Faker::TvShows::VentureBros.quote,
     email: Faker::Internet.email,
@@ -25,7 +25,7 @@ Ticket.destroy_all
   )
 end
 
-url = "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=345&apikey=U4exrI3LSXdAk4c4wYfmdix9kS7s8Pb9"
+url = "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=345&size=100&apikey=U4exrI3LSXdAk4c4wYfmdix9kS7s8Pb9"
 response = RestClient.get(url)
 data = JSON.parse(response)
 
@@ -47,7 +47,7 @@ seed_events.each do |event|
 end
 
 #   # Ticket.create
-50.times do
+75.times do
   Ticket.create(
     user_id: User.all.sample.id,
     event_id: Event.all.sample.id,

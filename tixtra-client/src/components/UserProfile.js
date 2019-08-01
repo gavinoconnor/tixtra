@@ -31,6 +31,10 @@ class UserProfile extends React.Component {
     })
   }
 
+  showAlert = () => {
+    alert("Friend added!")
+  }
+
   newFriend = (e) => {
     console.log("new friend", this.props)
     e.preventDefault();
@@ -49,6 +53,7 @@ class UserProfile extends React.Component {
       .then(response => {
   				this.props.addFriend(response)
         })
+        this.showAlert();
       }
 
   render() {
@@ -62,7 +67,7 @@ class UserProfile extends React.Component {
 
             <Grid item style={{display:"flex", direction:"row", justify: "space-between", alignItems:"center"}}>
              <Avatar alt={this.props.viewedUser.username} src={this.props.viewedUser.avatar} style={{margin: "10px", width: "100px", height: "100px"}}/>
-             <Typography color="#textSecondary">
+             <Typography color="textSecondary">
                Name: {this.props.viewedUser.username} <br />
                Location: {this.props.viewedUser.location} <br />
                Age: {this.props.viewedUser.age} <br />

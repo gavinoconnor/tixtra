@@ -108,6 +108,7 @@ const NavBar = (props) => {
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
+  viewedUser: state.viewedUser,
   events: state.events,
   users: state.users,
   venues: state.venues,
