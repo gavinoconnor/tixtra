@@ -19,7 +19,7 @@ class FriendCard extends React.Component {
     return (
       <div>
         <Grid item xs={8}>
-        <Card className="user-card" style={{ height: 325, width: 250, margin: "2vw", display: "flex", flexDirection: "column"}}>
+        <Card className="user-card" style={{ height: 325, width: 250, margin: "2vw", display: "flex", flexDirection: "column", backgroundColor: "#37474F", textAlign: "center"}}>
           <CardMedia
             style={{paddingTop: "60%"}}
             className="user-avatar"
@@ -35,6 +35,7 @@ class FriendCard extends React.Component {
             </Typography>
           </CardContent>
           <CardActions style={{backgroundColor: "#37474F"}}>
+            {console.log("friend check", this.props.friend.id)}
             <Link to={`/users/${this.props.friend.id}`}>
             <Button size="small" style={{color:"white"}}>
               View Profile
@@ -48,12 +49,10 @@ class FriendCard extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
-  viewedUser: state.viewedUser
+  viewedUser: state.viewedUser,
+  friends: state.friends
 })
 
 export default connect(mapStateToProps)(FriendCard);
-
-// style={{display:"grid", direction:"row", paddingTop: "2%", paddingBottom: "2%", justifyContent: "space-evenly", width: "50%", height: "200px", border: "1px solid grey", borderRadius: "5px", backgroundColor: "#37474F", margin: "2vw"}}

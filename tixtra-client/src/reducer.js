@@ -10,7 +10,8 @@ import {
   CREATE_USER,
   UPDATE_USER,
   MAKE_REQUEST,
-  ADD_FRIEND
+  ADD_FRIEND,
+  ADD_TICKET
   } from './types'
 
 const defaultState = {
@@ -59,6 +60,8 @@ function reducer(prevState = defaultState, action) {
     case MAKE_REQUEST:
       return {...prevState, requests: action.payload}
     case ADD_FRIEND:
+      return {...prevState, currentUser: action.payload}
+    case ADD_TICKET:
       return {...prevState, currentUser: action.payload}
     default:
       return prevState
