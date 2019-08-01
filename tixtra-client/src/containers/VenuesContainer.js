@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { fetchVenues } from '../actions';
 import VenueCard from '../components/VenueCard'
 
-// import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -41,7 +39,6 @@ class VenuesContainer extends React.Component {
     })
   }
 
-
   componentDidMount() {
    this.props.fetchVenues()
   }
@@ -51,9 +48,8 @@ class VenuesContainer extends React.Component {
       <div>
         <main>
           {/* Hero unit */}
-          <div className="hero-content" style={{backgroundColor: "#FAFAFA",
+          <div className="hero-content" style={{backgroundColor: "#37474F",
           padding: "theme.spacing(8, 0, 6)"}}>
-          <ListSubheader component="div">Venues</ListSubheader>
             <Container maxWidth="sm" style={{paddingBottom: "2%", paddingTop: "1%"}}>
               <div>
                 <form className='search-bar' onSubmit={this.handleSubmit}>

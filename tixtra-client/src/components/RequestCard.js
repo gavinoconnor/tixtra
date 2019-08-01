@@ -25,10 +25,8 @@ class RequestCard extends React.Component {
         }
     })
   }
-
   render() {
     console.log("Request:", this.props.viewedUser.requests)
-
     return(
       <div>
         {this.state.cards.map(card => {
@@ -39,8 +37,8 @@ class RequestCard extends React.Component {
       </div>
     )
   }
-
 }
+
 const mapStateToProps = state => ({
   users: state.users,
   viewedUser: state.viewedUser

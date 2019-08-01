@@ -1,15 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateUser } from '../actions';
+import { Redirect } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles';
-// import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-// import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-// import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-// import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles(theme => ({
@@ -39,7 +36,7 @@ const ProfileForm = (props) => {
   };
 
   const handleSubmit = (event, values) => {
-    console.log(values)
+    console.log("profile", props)
     event.preventDefault();
     console.log(props)
     fetch(`http://localhost:3000/api/v1/users/${props.currentUser.id}`, {
@@ -57,7 +54,7 @@ const ProfileForm = (props) => {
         alert(response.errors)
       } else {
 				props.updateUser(response.user)
-				props.history.push(`/users/${props.currentUser.id}`)
+				return <Redirect to={`/users/${props.currentUser.id}`}/>
       }
     })
 }

@@ -51,10 +51,11 @@ class UsersContainer extends React.Component {
       <div>
         <main>
           {/* Hero unit */}
-          <div className="hero-content" style={{backgroundColor: "#FAFAFA",
+          <div className="hero-content" style={{backgroundColor: "#37474F",
           padding: "theme.spacing(8, 0, 6)"}}>
-          <ListSubheader component="div">Users</ListSubheader>
-            <Container maxWidth="sm" style={{paddingBottom: "2%", paddingTop: "1%"}}>
+            <Container
+              maxWidth="sm"
+              style={{paddingBottom: "2%", paddingTop: "1%", backgroundColor: "#37474F"}}>
               <div>
                 <form className='search-bar' onSubmit={this.handleSubmit}>
                   <input
@@ -99,7 +100,8 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users
+  users: state.users,
+  tickets: state.tickets
 })
 
 

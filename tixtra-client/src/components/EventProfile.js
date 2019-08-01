@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchEvent } from '../actions';
-import TicketCard from './TicketCard';
+import UserCard from './UserCard';
+
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
 
 class EventProfile extends React.Component {
 
@@ -10,22 +15,37 @@ class EventProfile extends React.Component {
    }
 
   render() {
+    console.log("Event Profile", this.props.selectedEvent)
     if (!this.props.selectedEvent) {
-      return <h1>loading</h1>
+      return <div>Loading...</div>
     }
-    console.log("event profile", this.props.selectedEvent.tickets)
 
     return (
       <div>
-        <h1>Event Profile</h1>
-        <p>Name: {this.props.selectedEvent.artist} </p>
-        <img src={this.props.selectedEvent.avatar} alt={this.props.selectedEvent.artist}/>
-        {this.props.selectedEvent.tickets.length > 0
-          ?
-        this.props.selectedEvent.tickets.map(ticket => {
-          return <TicketCard key={ticket.id} {...ticket}/>
-        })
-        : <h1>No tickets</h1> }
+          <Container style={{display: "grid", direction: "column", justifyContent: "center", marginBottom: "2vw"}}>
+            <img src={this.props.selectedEvent.avatar} alt={this.props.selectedEvent.artist} style={{maxHeight: "60%", maxWidth: "100%"}}/>
+            <Typography style={{display: "grid", direction: "column", justifyContent: "center", marginBottom: "2vw", fontSize:"30px", fontWeight:"bold", color: "#37474F"}}>
+              {this.props.selectedEvent.artist}
+            </Typography>
+          </Container>
+
+          <Container style={{display: "grid", direction: "row", justifyContent: "center"}}>
+            <Typography style={{fontSize: "25px", color: "#37474F"}}>
+              Users with Tickets:
+            </Typography>
+          </Container>
+
+          <Grid container>
+            <Grid item style={{display: "flex", flexWrap: "row", justify: "center"}}>
+            {this.props.selectedEvent.tickets.length > 0
+              ?
+            this.props.selectedEvent.tickets.map(ticket => {
+              console.log("TIX:", ticket)
+              return <UserCard key={ticket.user.id} id={ticket.user.id} username={ticket.user.username} avatar={ticket.user.avatar} bio={ticket.user.bio}/>
+            })
+            : <h1>No tickets</h1> }
+          </Grid>
+        </Grid>
       </div>
     )
   }
@@ -34,7 +54,9 @@ class EventProfile extends React.Component {
 const mapStateToProps = state => ({
   users: state.users,
   events: state.events,
-  selectedEvent: state.selectedEvent
+  selectedEvent: state.selectedEvent,
+  tickets: state.tickets,
+  viewedUser: state.viewedUser
 })
 
 export default connect(mapStateToProps, { fetchEvent })(EventProfile);

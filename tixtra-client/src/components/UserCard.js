@@ -14,24 +14,25 @@ const UserCard = (props) => {
   return (
     <div>
       <Grid item xs={8}>
-      <Card className="user-card" style={{ height: 330, width: 250, margin: "2vw", display: "flex", flexDirection: "column" }}>
+      <Card className="user-card" style={{ height: 330, width: 250, margin: "2vw", display: "flex", flexDirection: "column", backgroundColor: "#37474F", textAlign:"center" }}>
         <CardMedia
-          style={{paddingTop: "56.25%"}}
+          style={{paddingTop: "60%"}}
           className="user-avatar"
           image={props.avatar} alt={props.username}
           title={props.username}
         />
-        <CardContent className="user-content">
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2" style={{color: "white", justifyContent: "center"}}>
             {props.username}
           </Typography>
-          <Typography>
+          <Typography style={{color: "white"}}>
             {<span>"{props.bio}"</span>}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions style={{justifyContent:"center", paddingBottom:"15%"}}>
+          {console.log("UserCard:", props)}
           <Link to={`/users/${props.id}`}>
-          <Button size="small" color="primary">
+          <Button size="small" style={{fontweight: "bold", color: "white"}}>
             View Profile
           </Button>
           </Link>

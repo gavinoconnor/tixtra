@@ -46,22 +46,22 @@ const NavBar = (props) => {
 
     return(
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" style={{backgroundColor: "#212121"}}>
             <Toolbar>
               <LocalActivityOutlinedIcon/>
-              <Typography variant="h5" color="textPrimary">
-                  <Link to="/"> <Button size="medium"> Tixtra </Button> </Link>
+              <Typography variant="h5" color="textSecondary">
+                  <Link to="/"> <Button size="large" style={{color:"white", fontSize: "30px", fontWeight: "bold"}}> Tixtra </Button> </Link>
               </Typography>
                 <LocalActivityOutlinedIcon/>&nbsp;&nbsp;
                 <div className="nav-options" style={{display: 'flex', flexDirection: 'row', justify: 'center'}}>
-                <Typography variant="h5" color="textPrimary">
-                  <Link to="/users"> <Button> Users </Button> </Link>
+                <Typography variant="h5" color="textSecondary">
+                  <Link to="/users"> <Button style={{color:"white"}}> Users </Button> </Link>
                 </Typography>&nbsp;&nbsp;
-                <Typography variant="h5" color="textPrimary">
-                  <Link to="/events"> <Button> Events </Button> </Link>
+                <Typography variant="h5" color="textSecondary">
+                  <Link to="/events"> <Button style={{color:"white"}}> Events </Button> </Link>
                 </Typography>&nbsp;&nbsp;
-                <Typography variant="h5" color="textPrimary">
-                  <Link to="/venues"> <Button> Venues </Button> </Link>
+                <Typography variant="h5" color="textSecondary">
+                  <Link to="/venues"> <Button style={{color:"white"}}> Venues </Button> </Link>
                 </Typography>&nbsp;&nbsp;
                 </div>
                 <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="Menu" aria-haspopup="true" onClick={handleMenu}>
