@@ -11,27 +11,28 @@ import Typography from '@material-ui/core/Typography';
 
 
 const EventCard = (props) => {
+  {console.log("EVENT CARD:", props)}
   return (
     <div>
       <Grid item xs={8}>
-      <Card className="event-card" style={{ height: 350, width: 250, margin: "2vw", display: "flex", flexDirection: "column" }}>
+      <Card className="event-card" style={{ height: 400, width: 350, margin: "2vw", display: "flex", flexDirection: "column", backgroundColor: "#37474F", textAlign:"center" }}>
         <CardMedia
           style={{paddingTop: "56.25%"}}
           className="event-avatar"
           image={props.avatar} alt={props.username}
           title={props.artist}
         />
-        <CardContent className="event-content">
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent className="event-content" style={{justifyContent:"center", backgroundColor: "#37474F"}}>
+          <Typography style={{color: "white"}} gutterBottom variant="h5" component="h2">
             {props.artist}
           </Typography>
           <Typography>
             {<span>{props.date}</span>}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions style={{justifyContent:"center", paddingBottom:"15%"}}>
           <Link to={`/events/${props.id}`}>
-          <Button size="small" color="primary">
+          <Button size="small" style={{color: "white"}}>
             Event Details
           </Button>
           </Link>

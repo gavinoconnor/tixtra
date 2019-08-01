@@ -36,6 +36,14 @@ class RequestingUser extends React.Component {
     })
   }
 
+  handleAccept = () => {
+    alert("Party! Message your new friend and let them know!")
+  }
+
+  handleDeny = () => {
+    alert("Got it. We'll let them down easy.")
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     this.setState({
@@ -84,8 +92,8 @@ class RequestingUser extends React.Component {
 
            <CardActions>
               <Button size="small" color="primary" onClick={this.toggleOpen}> Message User </Button>
-              <Button size="small" color="primary"> Accept Request </Button>
-              <Button size="small" color="error"> Deny Request </Button>
+              <Button size="small" color="primary" onClick={this.handleAccept}> Accept Request </Button>
+              <Button size="small" style={{color:"red"}} onClick={this.handleDeny}> Deny Request </Button>
            </CardActions>
            {this.state.open
              ? <CardActions>

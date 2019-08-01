@@ -24,6 +24,10 @@ class TicketCard extends React.Component {
     })
   }
 
+  showAlert = () => {
+    alert("Request sent!")
+  }
+
   handleRequest = (e) => {
     e.preventDefault();
     console.log("Fetch:", this.props)
@@ -50,6 +54,7 @@ class TicketCard extends React.Component {
     				this.props.makeRequest(response)
           }
       })
+      this.showAlert()
     }
 
   toggleShowRequests = (event) => {

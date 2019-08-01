@@ -1,4 +1,4 @@
-import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER, MAKE_REQUEST } from './types';
+import { FETCH_ALL_USERS, FETCH_USER, FETCH_ALL_VENUES, FETCH_VENUE, FETCH_ALL_EVENTS, FETCH_EVENT, LOG_IN, LOG_OUT, CREATE_USER, UPDATE_USER, MAKE_REQUEST, ADD_FRIEND } from './types';
 
 function fetchUsers(){
   return function(dispatch){
@@ -91,6 +91,13 @@ function makeRequest(response) {
   }
 }
 
+function addFriend(response) {
+  console.log("FRIEND ACTION:", response)
+  return function(dispatch){
+    dispatch({type: ADD_FRIEND, payload: response})
+  }
+}
+
 
 
 export {
@@ -104,12 +111,6 @@ export {
   logout,
   createUser,
   updateUser,
-  makeRequest
+  makeRequest,
+  addFriend
 }
-
-// function search(searchTerm) {
-//   console.log("search", searchTerm)
-//   return function(dispatch) {
-//     dispatch({type: SEARCH, payload: searchTerm})
-//   }
-// }

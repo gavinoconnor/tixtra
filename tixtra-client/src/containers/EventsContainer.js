@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { fetchEvents } from '../actions';
 import EventCard from '../components/EventCard'
 
-// import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -22,13 +20,10 @@ class EventsContainer extends React.Component {
     const filtered = this.props.events.filter(event => {
       return event.artist.toLowerCase().includes(this.state.searchTerm.toLowerCase())
     })
-    this.setState({
-      filteredEvents: filtered
-    })
+    this.setState({filteredEvents: filtered})
   }
 
   handleChange = (event) => {
-    console.log(event.target.value)
     this.setState({
       searchTerm: event.target.value
     }, () => this.applyFilter())
@@ -41,19 +36,18 @@ class EventsContainer extends React.Component {
     })
   }
 
-
   componentDidMount() {
    this.props.fetchEvents()
   }
 
   render(){
+    console.log("EVENTS CONTAINER", this.props)
     return (
       <div>
         <main>
           {/* Hero unit */}
-          <div className="hero-content" style={{backgroundColor: "#FAFAFA",
+          <div className="hero-content" style={{backgroundColor: "#37474F",
           padding: "theme.spacing(8, 0, 6)"}}>
-          <ListSubheader component="div">Events</ListSubheader>
             <Container maxWidth="sm" style={{paddingBottom: "2%", paddingTop: "1%"}}>
               <div>
                 <form className='search-bar' onSubmit={this.handleSubmit}>
@@ -74,6 +68,7 @@ class EventsContainer extends React.Component {
             <Grid container justify="space-around" spacing={2} style={{display: "flex", flexWrap: "wrap", flexDirection: "row"}}>
               {this.state.filteredEvents.length > 0
                 ? this.state.filteredEvents.map(event => {
+                  console.log("filtered events", this.state.filteredEvents)
                 return <EventCard key={event.id} {...event}/>
                 })
                 : this.props.events.map(event => {

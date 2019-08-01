@@ -9,7 +9,8 @@ import {
   LOG_OUT,
   CREATE_USER,
   UPDATE_USER,
-  MAKE_REQUEST
+  MAKE_REQUEST,
+  ADD_FRIEND
   } from './types'
 
 const defaultState = {
@@ -23,9 +24,10 @@ const defaultState = {
   events: [],
   tickets: [],
   requests: [],
+  friends: [],
   viewingUsers: false,
   viewingVenues: false,
-  viweingEvents: false
+  viewingEvents: false,
 }
 
 
@@ -56,12 +58,12 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, currentUser: action.payload}
     case MAKE_REQUEST:
       return {...prevState, requests: action.payload}
+    case ADD_FRIEND:
+      return {...prevState, currentUser: action.payload}
     default:
       return prevState
   }
 }
-// const users = prevState.users.filter(user => {
-  //   return user.username.toLowerCase().includes(prevState.searchTerm.toLowerCase())
-  // })
+
 
 export default reducer
