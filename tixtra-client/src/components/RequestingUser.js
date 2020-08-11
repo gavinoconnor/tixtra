@@ -71,6 +71,7 @@ class RequestingUser extends React.Component {
 }
 
   render() {
+    console.log("requesting:", this.state)
     return (
       <div>
         <Card style={{margin: "2vw", maxWidth: "220px"}}>

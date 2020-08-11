@@ -8,17 +8,18 @@ import Button from '@material-ui/core/Button';
 class RequestCard extends React.Component {
 
   state = {
-    cards:[]
+    cards: []
   }
 
   componentDidMount(){
     return this.props.viewedUser.requests.forEach(request => {
+      console.log("request fetch:", request.requester)
         if (request.requester) {
           return fetch(`http://localhost:3000/api/v1/users/${request.requester}`)
           .then(res => res.json())
           .then(data => {
             console.log("getRequest", data)
-            this.setState({
+            return this.setState({
               cards: [...this.state.cards, data]
             })
           })
@@ -26,12 +27,16 @@ class RequestCard extends React.Component {
     })
   }
   render() {
-    console.log("Request:", this.props.viewedUser.requests)
+    console.log("Request:", this.state.cards)
     return(
       <div>
-        {this.state.cards.map(card => {
+        {this.state.cards.length > 0
+          ? this.state.cards.map(card => {
           return <RequestingUser {...card} key={card.id}/>
-        })}
+        })
+        : null
+      }
+
 
         <Button color="primary" size="small" onClick={this.props.toggleShowRequests}>Back</Button>
       </div>

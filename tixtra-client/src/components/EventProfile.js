@@ -53,7 +53,7 @@ class EventProfile extends React.Component {
             <Typography style={{display: "grid", direction: "column", justifyContent: "center", marginBottom: "2vw", fontSize:"30px", fontWeight:"bold", color: "#37474F"}}>
               {this.props.selectedEvent.artist}
             </Typography>
-            <Typography style={{fontSize: "18px", color: "#37474F", marginTop: "4vw", marginLeft: "32vw"}}>
+            <Typography style={{fontSize: "18px", color: "#37474F", marginTop: "4vw", marginLeft: "2vw"}}>
               Have a ticket to this event?
               <Button size="medium" color="primary" onClick={this.addTicket}>Add Ticket</Button>
             </Typography>

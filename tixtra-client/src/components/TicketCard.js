@@ -58,7 +58,6 @@ class TicketCard extends React.Component {
     }
 
   toggleShowRequests = (event) => {
-    console.log(this.state.showRequests)
     this.setState({
       showRequests: !this.state.showRequests
     })
