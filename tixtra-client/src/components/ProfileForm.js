@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -71,7 +71,7 @@ const ProfileForm = (props) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <AccountCircle />
+              {/* <AccountCircle /> */}
             </InputAdornment>
           ),
         }}
@@ -86,7 +86,7 @@ const ProfileForm = (props) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <AccountCircle />
+            {/* <AccountCircle /> */}
           </InputAdornment>
         ),
       }}
@@ -101,7 +101,7 @@ const ProfileForm = (props) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <AccountCircle />
+            {/* <AccountCircle /> */}
           </InputAdornment>
         ),
       }}
@@ -116,7 +116,7 @@ const ProfileForm = (props) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <AccountCircle />
+            {/* <AccountCircle /> */}
           </InputAdornment>
         ),
       }}
@@ -131,7 +131,7 @@ const ProfileForm = (props) => {
     InputProps={{
       startAdornment: (
         <InputAdornment position="start">
-          <AccountCircle />
+          {/* <AccountCircle /> */}
         </InputAdornment>
       ),
     }}
@@ -146,7 +146,7 @@ const ProfileForm = (props) => {
     InputProps={{
       startAdornment: (
         <InputAdornment position="start">
-          <AccountCircle />
+          {/* <AccountCircle /> */}
         </InputAdornment>
       ),
     }}
