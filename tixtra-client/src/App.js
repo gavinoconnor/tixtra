@@ -13,8 +13,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from './actions';
 
-// import './App.css';
-
 
 class App extends React.Component {
   componentDidMount = () => {
