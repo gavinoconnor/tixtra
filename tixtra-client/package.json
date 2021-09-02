@@ -6,7 +6,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "node-forge": "^0.10.0",
-    "object-path": "^0.11.5",
+    "object-path": "^0.11.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-pure-lifecycle": "^3.0.0",
