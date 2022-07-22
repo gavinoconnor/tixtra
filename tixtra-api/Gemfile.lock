@@ -157,7 +157,7 @@ GEM
     ticketmaster-sdk (0.0.06)
       faraday
       json
-    tzinfo (1.2.7)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     ui_faces (0.1.4)
     unf (0.1.4)
